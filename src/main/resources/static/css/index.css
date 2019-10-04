@@ -1,0 +1,171 @@
+li {
+  list-style: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: #666;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+.clearfix:after {
+  *zoom: 1;
+}
+input {
+  border: 0;
+  outline: 0;
+}
+/* 版心 */
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+.container .head {
+  margin-bottom: 22px;
+}
+.container .head h1 {
+  font-weight: normal;
+  font-family: '宋体';
+  margin: 30px 0 18px 0;
+}
+.container .head i {
+  margin-left: 40px;
+  color: #666;
+}
+.container .main .nav {
+  height: 30px;
+  border: 1px solid #eee;
+}
+.container .main .nav ul {
+  height: 100%;
+}
+.container .main .nav ul li {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+.container .main .nav ul li.target {
+  position: relative;
+}
+.container .main .nav ul li.target ul {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 31px;
+  width: 100%;
+  border: 1px solid #eee;
+  border-top: none;
+}
+.container .main .nav ul li.target ul:hover {
+  opacity: 1;
+  height: auto;
+}
+.container .main .nav ul li.target ul li {
+  height: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 30px;
+  background-color: #fff;
+}
+.container .main .nav ul li.target ul li:hover {
+  background-color: #eee;
+}
+.container .main .content .left {
+  float: left;
+  width: 918px;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 26px 20px 20px 20px;
+}
+.container .main .content .left .item {
+  margin-bottom: 46px;
+}
+.container .main .content .left .item h4 a {
+  font-size: 18px;
+  color: black;
+}
+.container .main .content .left .item a {
+  color: #886353;
+  font-size: 12px;
+}
+.container .main .content .left .item .time {
+  margin: 18px 0;
+}
+.container .main .content .left .item .text {
+  font-size: 14px;
+}
+.container .main .content .left .item .tags {
+  margin-top: 22px;
+  margin-bottom: 20px;
+  color: #886353;
+}
+.container .main .content .left .item .read {
+  text-align: right;
+}
+.container .main .content .right {
+  float: right;
+  width: 191px;
+  padding: 26px 24px 22px 24px;
+  border-right: 1px solid #eee;
+}
+.container .main .content .right .search {
+  display: flex;
+  width: 176px;
+  height: 22px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 4px;
+  padding-left: 8px;
+}
+.container .main .content .right .search i {
+  width: 18px;
+}
+.container .main .content .right .search input {
+  width: 158px;
+}
+.container .main .content .right .article {
+  margin-top: 20px;
+}
+.container .main .content .right .article h5 {
+  margin-bottom: 10px;
+}
+.container .main .content .right .article ul li {
+  position: relative;
+  padding-left: 16px;
+}
+.container .main .content .right .article ul li a {
+  color: #886353;
+  font-size: 12px;
+}
+.container .main .content .right .article ul li i {
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+.container .bottom {
+  margin-top: 48px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  line-height: 36px;
+  height: 36px;
+  text-align: center;
+}
+.container .bottom a {
+  color: #886353;
+}
