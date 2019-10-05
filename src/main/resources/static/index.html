@@ -129,7 +129,7 @@
 <script type="text/html" id="mytemp2">
    {{each data}}
    <div class="item">
-        <h4><a href="#">{{$value.title}}</a></h4>
+        <h4><a id="target" href="javascript:" data-id="{{$value.id}}">{{$value.title}}</a></h4>
         <div class="time">
           <span>{{$value.createTime | dateFormat}}</span>&nbsp;&nbsp;<a href="#">{{$value.sortName}}</a>
         </div>
@@ -152,6 +152,28 @@
     {{each}}
     <li>{{$value}}</li>
     {{/each}}
+</script>
+<!-- 模板--详情页 -->
+<script type="text/html" id="tempDetail">
+    <div class="item">
+            <h4>{{title}}</h4>
+            <div class="time">
+              <span>{{createTime | dateFormat}}</span>&nbsp;&nbsp;<a href="">{{sortName}}</a>
+            </div>
+            <!-- 内容 -->
+            <div id="body" style="min-height:600px">
+                <!-- {{content}} -->
+            </div>
+            <div class="tags">
+                  标签:{{each tags}}
+                   <a href="#">{{$value}}</a>
+                  {{/each}}
+            </div>
+            <!-- 下一页 -->
+            <div class="nextpage" style="text-align:center">
+                <a href="">After Effects CC 中文版案例教程（李涛主讲，含素材）»</a>
+            </div>
+        </div>
 </script>
 
 <!-- <script src="./js/index.js"></script> -->
@@ -220,6 +242,30 @@
         window.scrollTo(0,0);
         })
     }
+    })
+    //给文章列表的h4加点击事件
+    document.getElementsByClassName('left')[0].addEventListener('click',function(event){
+        if(event.target.nodeName=='A'&&event.target.id=='target'){
+            //获取地址栏传递的参数,然后发请求
+            var id=event.target.getAttribute('data-id');
+            // console.log(id)
+            axios.get('http://192.168.31.130:8080/articles/'+id).then(res=>{
+                console.log(res);
+                var html=template('tempDetail',res.data.data);
+                document.getElementsByClassName('content')[0].children[0].innerHTML=html;
+                // console.log(html)
+                var itemList=document.getElementsByClassName('content')[0].children[0].children;
+                for(var i=0;i<itemList.length;i++){
+                    itemList[i].children[2].innerHTML=res.data.data.content;
+                }
+
+                //清空页码
+                document.getElementsByClassName('page')[0].children[0].innerHTML='';
+                //滚动条回到顶部
+                window.scrollTo(0,0);
+            })
+         
+        }
     })
     
     
