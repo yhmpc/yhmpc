@@ -5,6 +5,8 @@
     <title>小明的自留地</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./fonts/iconfont.css">
+    <script src="./js/axios.js"></script>
+    <script src="./js/template-web.js"></script>
     <style>
     .icon-fangdajing {
         color:#333;
@@ -127,4 +129,35 @@
    </div>
 
 </body>
+<!-- 模板 -->
+<script type="text/html" id="mytemp">
+    {{each data}}
+    {{if $value.isHide=='n'&&$value.subNavigations.length==0}}
+    <li><a href="index.html">{{$value.naviname}}</a></li>
+    {{else if $value.isHide=='n'&&$value.subNavigations.length!=0}}
+    <li class="target"><a href="index.html">{{$value.naviname}}</a>
+        <ul>
+            {{each $value.subNavigations}}
+            <li><a href="index.html">{{$value.naviname}}</a></li>
+            {{/each}}
+        </ul>
+    </li>
+    {{/if}}
+    {{/each}}
+</script>
+<!-- <script src="./js/index.js"></script> -->
+<script>
+    //发请求获取导航栏数据
+ axios.get('http://192.168.31.130:8080/navigations').then(res=>{
+        if(res.data.code===20000){
+            console.log(res);
+        //调用template,创建元素
+        var html = template('mytemp',res.data);
+        // console.log(html)
+        }
+        document.getElementsByClassName('nav')[0].children[0].innerHTML=html;
+
+
+    })
+</script>
 </html>
