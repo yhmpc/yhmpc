@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name = "navi")
 public class Navigation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String naviname;
     private String url;
