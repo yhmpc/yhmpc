@@ -18,7 +18,7 @@ public class ArticleService {
     }
 
     public Page<Article> getArticlesByPage(Integer page) {
-        PageRequest pageRequest = PageRequest.of(page, 7);
+        PageRequest pageRequest = PageRequest.of(page-1, 7);
         return articleDao.findAll(pageRequest);
     }
 

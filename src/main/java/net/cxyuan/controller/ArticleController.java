@@ -10,10 +10,7 @@ import net.cxyuan.service.TagService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/articles")
+@CrossOrigin
 public class ArticleController {
 
     @Autowired
@@ -36,7 +34,7 @@ public class ArticleController {
     @GetMapping(value = {"/p/{page}", "/p"})
     public Result getArticlesByPage(@PathVariable(required = false) Integer page) {
         if (page == null) {
-            page = 0;
+            page = 1;
         }
         Page<Article> articlesByPage = articleService.getArticlesByPage(page);
         long total = articlesByPage.getTotalElements();
