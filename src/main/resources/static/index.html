@@ -62,7 +62,13 @@
                         <a href="">评论(0)</a> <a href="">浏览(13656)</a>
                   </div>
               </div> -->
-            <!-- 分页器 -->
+            </div>
+               <!-- 分页器 -->
+            <div class="page">
+                    <ul>
+                        <!-- <li class="active">1</li>
+                        <li>2</li> -->
+                    </ul>
             </div>
             <!-- 右边的搜索栏 -->
             <div class="right">
@@ -141,9 +147,17 @@
     </div>
    {{/each}}
 </script>
+<!-- 模板-分页 -->
+<script type="text/html" id="tempPage">
+    {{each}}
+    <li>{{$value}}</li>
+    {{/each}}
+</script>
 
 <!-- <script src="./js/index.js"></script> -->
 <script>
+    var total;//文章总条数
+    var pageSize;//页容量
     // 注册一个过滤器
     template.defaults.imports.dateFormat = function(date, format){
         var time=new Date(date);
@@ -166,10 +180,48 @@
     })
     //发请求获取首页文章列表
     axios.get('http://192.168.31.130:8080/articles/p/1').then(res=>{
-        console.log(res);
+        // console.log(res);
+        // 文章列表
         var html=template('mytemp2',res.data.data);
         // console.log(html);
         document.getElementsByClassName('content')[0].children[0].innerHTML=html;
+        total=res.data.data.total;//文章总条数
+        pageSize=res.data.data.data.length;//一页显示多少条文章
+        var totalPage=Math.ceil(total/pageSize);
+        //循环产生数字,存到数组
+        var arr=[];
+        for(var i=1;i<=totalPage;i++){
+            arr.push(i)
+        }
+        var result=template('tempPage',arr);
+        document.getElementsByClassName('page')[0].children[0].innerHTML=result;
     })
+    //给页码添加点击事件
+    var page=document.getElementsByClassName('page')[0];
+    page.addEventListener('click',function(event){
+        if(event.target.nodeName=='LI'){
+        var currentPage=event.target.innerText;
+          // 排除法
+        var liList=document.getElementsByClassName('page')[0].children[0].children;
+        // console.log(liList)
+        for(var i=0;i<liList.length;i++){
+            liList[i].className='';
+        }
+        //加上active类
+        event.target.className="active";
+      
+        axios.get('http://192.168.31.130:8080/articles/p/'+currentPage).then(res=>{
+        // console.log(res);
+        // 文章列表
+        var html=template('mytemp2',res.data.data);
+        // console.log(html);
+        document.getElementsByClassName('content')[0].children[0].innerHTML=html;
+        //滚动条滚动到顶部
+        window.scrollTo(0,0);
+        })
+    }
+    })
+    
+    
 </script>
 </html>

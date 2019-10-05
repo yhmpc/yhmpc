@@ -86,6 +86,9 @@ input {
 .container .main .nav ul li.target ul li:hover {
   background-color: #eee;
 }
+.container .main .content {
+  position: relative;
+}
 .container .main .content .left {
   float: left;
   width: 918px;
@@ -154,6 +157,27 @@ input {
   position: absolute;
   top: 4px;
   left: 0;
+}
+.container .main .content .page {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+}
+.container .main .content .page ul li {
+  cursor: pointer;
+  float: left;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+.container .main .content .page ul li.active {
+  color: #ccc;
+  text-decoration: none;
+}
+.container .main .content .page ul li:hover {
+  text-decoration: overline;
 }
 .container .bottom {
   margin-top: 48px;
