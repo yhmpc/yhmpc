@@ -92,6 +92,7 @@ input {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   padding: 26px 20px 20px 20px;
+  font-size: 12px;
 }
 .container .main .content .left .item {
   margin-bottom: 46px;
@@ -102,13 +103,9 @@ input {
 }
 .container .main .content .left .item a {
   color: #886353;
-  font-size: 12px;
 }
 .container .main .content .left .item .time {
   margin: 18px 0;
-}
-.container .main .content .left .item .text {
-  font-size: 14px;
 }
 .container .main .content .left .item .tags {
   margin-top: 22px;
