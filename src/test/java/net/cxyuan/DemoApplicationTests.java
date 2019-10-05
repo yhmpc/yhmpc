@@ -27,8 +27,8 @@ public class DemoApplicationTests {
         account.setPassword("root");
         account.setDescription("系统管理员");
         account.setEmail("yhmpc@qq.com");
-        account.setIsDelete(YesNo.NO);
-        service.save(account);
+        account.setIsDelete(YesNo.n);
+        // service.save(account);
     }
 
 }

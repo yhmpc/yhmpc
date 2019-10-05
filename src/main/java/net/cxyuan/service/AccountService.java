@@ -13,7 +13,7 @@ public class AccountService {
 
 
     public Account getAccountById(String id) {
-        return accountDao.getOne(id);
+        return accountDao.findById(id).get();
     }
 
     public void save(Account account) {

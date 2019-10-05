@@ -1,11 +1,15 @@
 package net.cxyuan.bean;
 
 public enum YesNo {
-    YES("y"), NO("n");
+    y("y"), n("n");
 
     private final String status;
 
-    private YesNo(String status) {
+    YesNo(String status) {
         this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
