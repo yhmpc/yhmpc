@@ -25,7 +25,7 @@
            <!-- 导航栏 -->
            <div class="nav">
              <ul>
-                 <li><a href="#">首页</a></li>
+                 <!-- <li><a href="#">首页</a></li>
                  <li><a href="#">windows</a></li>
                  <li><a href="#">网络技术</a></li>
                  <li><a href="#">Office</a></li>
@@ -42,13 +42,13 @@
                                     <li><a href="#">小众运用</a></li>
                                 </ul>
                             </li>
-                 <li><a href="#">关于</a></li>
+                 <li><a href="#">关于</a></li> -->
              </ul>
            </div>
            <div class="content clearfix">
                <!-- 左边的文章内容 -->
             <div class="left">
-              <div class="item">
+              <!-- <div class="item">
                   <h4><a href="#">Corel VideoStudio Pro X8 - 会声会影 X8</a></h4>
                   <div class="time">
                     <span>2016-08-03</span>&nbsp;&nbsp;<a href="#">AE</a>
@@ -61,34 +61,8 @@
                   <div class="read">
                         <a href="">评论(0)</a> <a href="">浏览(13656)</a>
                   </div>
-              </div>
-              <div class="item">
-                    <h4><a href="#">Corel VideoStudio Pro X8 - 会声会影 X8</a></h4>
-                    <div class="time">
-                      <span>2016-08-03</span>&nbsp;&nbsp;<a href="#">AE</a>
-                    </div>
-                    <img src="./images/882W6.jpg" alt="">
-                    <div class="tags">
-                          标签: <a href="#">VideoStudioProX8</a> <a href="#">会声会影X8</a> <a href="#">会声会影X8汉化</a>
-                    </div>
-                    <div class="read">
-                          <a href="">评论(0)</a> <a href="">浏览(13656)</a>
-                    </div>
-                </div>
-                <div class="item">
-                        <h4><a href="#">Corel VideoStudio Pro X8 - 会声会影 X8</a></h4>
-                        <div class="time">
-                          <span>2016-08-03</span>&nbsp;&nbsp;<a href="#">AE</a>
-                        </div>
-                        <img src="./images/LHdn8.jpg" alt="">
-                     
-                        <div class="tags">
-                              标签: <a href="#">VideoStudioProX8</a> <a href="#">会声会影X8</a> <a href="#">会声会影X8汉化</a>
-                        </div>
-                        <div class="read">
-                              <a href="">评论(0)</a> <a href="">浏览(13656)</a>
-                        </div>
-                    </div>
+              </div> -->
+            <!-- 分页器 -->
             </div>
             <!-- 右边的搜索栏 -->
             <div class="right">
@@ -129,7 +103,7 @@
    </div>
 
 </body>
-<!-- 模板 -->
+<!-- 模板--导航栏-->
 <script type="text/html" id="mytemp">
     {{each data}}
     {{if $value.isHide=='n'&&$value.subNavigations.length==0}}
@@ -145,19 +119,57 @@
     {{/if}}
     {{/each}}
 </script>
+<!-- 模板--文章列表 -->
+<script type="text/html" id="mytemp2">
+   {{each data}}
+   <div class="item">
+        <h4><a href="#">{{$value.title}}</a></h4>
+        <div class="time">
+          <span>{{$value.createTime | dateFormat}}</span>&nbsp;&nbsp;<a href="#">{{$value.sortName}}</a>
+        </div>
+        <img src="{{$value.excerpt}}" alt="">
+       
+        <div class="tags">
+              标签: 
+             {{each $value.tags}}
+             <a href="#">{{$value}}</a> 
+             {{/each}}
+        </div>
+        <div class="read">
+              <a href="">评论(0)</a> <a href="">浏览({{$value.viewNum}})</a>
+        </div>
+    </div>
+   {{/each}}
+</script>
+
 <!-- <script src="./js/index.js"></script> -->
 <script>
+    // 注册一个过滤器
+    template.defaults.imports.dateFormat = function(date, format){
+        var time=new Date(date);
+        var year=time.getFullYear();
+        var month=time.getMonth()+1;
+        var day=time.getDate();
+        month=month<10?'0'+month:month;
+        day=day<10?'0'+day:day;
+        return year+'-'+month+'-'+day;
+    };
     //发请求获取导航栏数据
  axios.get('http://192.168.31.130:8080/navigations').then(res=>{
         if(res.data.code===20000){
-            console.log(res);
+            // console.log(res);
         //调用template,创建元素
         var html = template('mytemp',res.data);
         // console.log(html)
         }
         document.getElementsByClassName('nav')[0].children[0].innerHTML=html;
-
-
+    })
+    //发请求获取首页文章列表
+    axios.get('http://192.168.31.130:8080/articles/p/1').then(res=>{
+        console.log(res);
+        var html=template('mytemp2',res.data.data);
+        // console.log(html);
+        document.getElementsByClassName('content')[0].children[0].innerHTML=html;
     })
 </script>
 </html>
